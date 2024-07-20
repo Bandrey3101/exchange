@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  redis:
+    image: 'redis:latest'
+    container_name: 'redis'
+    ports:
+      - '6379:6379'
+
+  bot:
+    build: .
+    container_name: 'currency_bot'
+    volumes:
+      - .:/app
+    command: python bot.py
+    depends_on:
+      - redis
